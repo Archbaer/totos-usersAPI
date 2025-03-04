@@ -46,7 +46,7 @@ public class PublicKeyService {
         // Create HTTP entity with login credentials
         HttpEntity<Map<String, String>> entity = new HttpEntity<>(loginRequest, headers);
 
-        // Make POST request to login endpoint
+        // Make POST request to log in endpoint
         ResponseEntity<Map> response = restTemplate.exchange(
                 LOGIN_ENDPOINT,
                 HttpMethod.POST,
@@ -61,12 +61,12 @@ public class PublicKeyService {
     private PublicKey fetchPublicKey() throws Exception {
         // First, get the login token
         String apiToken = getLoginToken();
-
+        String token = apiToken.substring(7);
         RestTemplate restTemplate = new RestTemplate();
 
         // Prepare headers with the API token
         HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(apiToken);
+        headers.setBearerAuth(token);
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         // Make GET request to public key endpoint

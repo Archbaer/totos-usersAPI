@@ -11,12 +11,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.security.PublicKey;
 import java.util.Collections;
 import java.util.List;
 
+@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final PublicKeyService publicKeyService;
@@ -31,8 +33,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
+        // Extract JWT from Authorization Header.
         String token = extractJwtToken(request);
 
+        // If token exists, it will validate it.
         if (token != null) {
             try {
                 // Fetch public key
@@ -48,12 +52,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 // Extract roles and create authentication
                 List<SimpleGrantedAuthority> authorities = extractAuthorities(claims);
 
+                // Authentication object
                 Authentication authentication = new UsernamePasswordAuthenticationToken(
                         claims.getSubject(),
                         null,
                         authorities
                 );
 
+                // Set authentication in security context
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } catch (Exception e) {
                 // Token validation failed
