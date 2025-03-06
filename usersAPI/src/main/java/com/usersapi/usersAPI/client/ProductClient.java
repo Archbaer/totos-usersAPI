@@ -18,6 +18,6 @@
 //    ProductResponse updateProduct(@PathVariable("id") String id, @RequestBody ProductRequest request);
 //
 //    @DeleteMapping("/api/products/{id}")
-//    boolean deleteProduct(@PathVariable("id") String id);
+//    void deleteProduct(@PathVariable("id") String id);
 //
 //}
