@@ -3,14 +3,14 @@ package com.usersapi.usersAPI.model;
 import java.time.LocalDateTime;
 
 public class ProductResponse {
-    private String id;
+    private Long id;
     private String name;
     private String description;
     private double price;
     private int stockQuantity;
     private LocalDateTime createdAt;
 
-    public ProductResponse(String id, String name, String description, double price,
+    public ProductResponse(Long id, String name, String description, double price,
                            int stockQuantity, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
@@ -24,11 +24,11 @@ public class ProductResponse {
 
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
