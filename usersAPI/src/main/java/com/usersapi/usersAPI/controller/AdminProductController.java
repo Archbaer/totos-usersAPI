@@ -28,6 +28,7 @@ public class AdminProductController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('API')")
     public ProductResponse getProductById(@PathVariable Long id) {
         return productService.getProduct(id);
     }

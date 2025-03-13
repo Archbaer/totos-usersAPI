@@ -7,22 +7,22 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "products-api", url = "http://localhost:8082")
+@FeignClient(name = "products-api", url = "http://localhost:8083")
 public interface ProductClient {
 
-    @GetMapping("/api/products")
+    @GetMapping("/products")
     List<ProductResponse> getAllProducts();
 
-    @PostMapping("/api/products")
+    @PostMapping("/products")
     ProductResponse addProduct(@RequestBody ProductRequest request);
 
-    @GetMapping("/api/products/{id}")
+    @GetMapping("/products/{id}")
     ProductResponse getProduct(@PathVariable("id") Long id);
 
-    @PutMapping("/api/products/{id}")
+    @PutMapping("/products/{id}")
     ProductResponse updateProduct(@PathVariable("id") Long id, @RequestBody ProductRequest request);
 
-    @DeleteMapping("/api/products/{id}")
+    @DeleteMapping("/products/{id}")
     void deleteProduct(@PathVariable("id") Long id);
 
 }
